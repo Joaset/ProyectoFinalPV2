@@ -5,10 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class Win : MonoBehaviour
 {
+    void Start()
+    {
+        AudioManager.Instance.PlayAudio(AudioManager.Instance.winMusic);
+    }
     public void IniciarMenuPrincipal()
     {
         SceneManager.LoadScene(0);
         GameManager.Instance.ResetVida();
-        AudioManager.Instance.PlayAudio(AudioManager.Instance.menuMusic);
+        AudioManager.Instance.StopAudio(AudioManager.Instance.winMusic);
     }
 }

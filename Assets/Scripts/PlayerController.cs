@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviourPunCallbacks
 {
     private float velocidad;
     private float fuerzaSalto;
@@ -35,25 +36,31 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
-        tocarSuelo = Physics2D.OverlapCircle(suelo.position,tocarSueloRadio,capaSuelo);
-        CambiarDireccion();
-
-        if (tocarSuelo)
+        if (photonView.IsMine)
         {
-            animator.SetBool("isJumping", false);
-        }
-        else
-        {
-            animator.SetBool("isJumping", true);
-        }
+            tocarSuelo = Physics2D.OverlapCircle(suelo.position, tocarSueloRadio, capaSuelo);
+            CambiarDireccion();
 
-        Atacar();
+            if (tocarSuelo)
+            {
+                animator.SetBool("isJumping", false);
+            }
+            else
+            {
+                animator.SetBool("isJumping", true);
+            }
 
+            Atacar();
+        }
     }
 
-    private void FixedUpdate() {
-        Mover();
-        Saltar();
+    private void FixedUpdate() 
+    {
+        if (photonView.IsMine)
+        {
+            Mover();
+            Saltar();
+        }
     }
 
     void Saltar()

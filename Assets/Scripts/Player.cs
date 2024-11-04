@@ -1,29 +1,51 @@
+using Cinemachine;
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviourPunCallbacks
 {
     private bool puedeRecibirDaño;
     private float cooldownDaño;
     private SpriteRenderer spriteRenderer;
-    public GameObject gameOver;
-    public Image barraVida;
-    [SerializeField] private GameObject contadorVida;
+    private Image barraVida;
+    private GameObject contadorVida;
+    private CinemachineVirtualCamera camara;
+    private UICamara camaraHud;
+    private DisabledHud playerHud;
 
     void Start()
     {
-        puedeRecibirDaño = true;
-        cooldownDaño = 3f;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (photonView.IsMine)
+        {
+            puedeRecibirDaño = true;
+            cooldownDaño = 3f;
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            playerHud = GameObject.Find("Canvas").GetComponent<DisabledHud>();
+            playerHud.SetPlayer(gameObject);
+            barraVida = GameObject.Find("Canvas").transform.Find("Vida").GetComponent<Image>();
+            contadorVida = GameObject.Find("CantVida");
+            camara = FindObjectOfType<CinemachineVirtualCamera>();
+            camara.Follow = gameObject.transform;
+            camaraHud = GameObject.Find("Camera").GetComponent<UICamara>();
+            camaraHud.SetPlayer(gameObject.transform);
+        }
     }
 
     
     void Update()
     {
-        barraVida.fillAmount = GameManager.Instance.vidaMaxima / 100;
-        contadorVida.GetComponent<LifeCount>().ContarVida(GameManager.Instance.vidaMaxima);
+        if (photonView.IsMine)
+        {
+            barraVida.fillAmount = GameManager.Instance.vidaMaxima / 100;
+            contadorVida.GetComponent<LifeCount>().ContarVida(GameManager.Instance.vidaMaxima);
+        }
+        //    barraVida.fillAmount = GameManager.Instance.vidaMaxima / 100;
+        //contadorVida.GetComponent<LifeCount>().ContarVida(GameManager.Instance.vidaMaxima);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -44,10 +66,8 @@ public class Player : MonoBehaviour
 
             if (GameManager.Instance.vidaMaxima <= 0)
             {
-                AudioManager.Instance.PlayAudio(AudioManager.Instance.dead);
-                gameOver.SetActive(true);
-                Time.timeScale = 0;
-                GetComponent<PlayerController>().SetPuedeDisparar(false);
+                SceneManager.LoadScene(4);
+                Destroy(gameObject);
                 AudioManager.Instance.StopAudio(AudioManager.Instance.backgroundMusic);
             }
 
@@ -70,10 +90,8 @@ public class Player : MonoBehaviour
 
             if (GameManager.Instance.vidaMaxima <= 0)
             {
-                AudioManager.Instance.PlayAudio(AudioManager.Instance.dead);
-                gameOver.SetActive(true);
-                Time.timeScale = 0;
-                GetComponent<PlayerController>().SetPuedeDisparar(false);
+                SceneManager.LoadScene(4);
+                Destroy (gameObject);
                 AudioManager.Instance.StopAudio(AudioManager.Instance.backgroundMusic);
             }
 

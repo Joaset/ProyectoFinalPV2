@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-    [SerializeField] string nombre;
+   [SerializeField] string nombre;
    private void OnTriggerEnter2D(Collider2D collision) 
    {
         if (nombre == "puerta")
@@ -21,8 +21,6 @@ public class ChangeScene : MonoBehaviour
             {
                 SceneManager.LoadScene(3);
                 AudioManager.Instance.StopAudio(AudioManager.Instance.backgroundMusic);
-                AudioManager.Instance.PlayAudio(AudioManager.Instance.winMusic);
-
             }
         }
     }

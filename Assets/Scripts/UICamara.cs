@@ -11,31 +11,55 @@ public class UICamara : MonoBehaviour
 
     void Start()
     {
-        transform.position = new Vector3(player.position.x + xPos, player.position.y + yPos, zPos);
+        //transform.position = new Vector3(player.position.x + xPos, player.position.y + yPos, zPos);
     }
 
     void Update()
     {
-        transform.position = new Vector3(player.position.x + xPos, player.position.y + yPos, zPos);
-
-        if (player.GetComponent<Rigidbody2D>().velocity.x < -1)
+        if (player != null)
         {
-            xPos = (float)-0.05;
-            transform.rotation = new Quaternion(0, -178, 0, 0);
-            zPos = 10;
-            transform.position = new Vector3(player.position.x - xPos, player.position.y + yPos, zPos);
-        }
-        if (player.GetComponent<Rigidbody2D>().velocity.x > 1)
-        {
-            xPos = (float)0.05;
-            transform.rotation = new Quaternion(0, 0, 0, 0);
-            zPos = -10;
+            GetComponent<Camera>().enabled = true;
             transform.position = new Vector3(player.position.x + xPos, player.position.y + yPos, zPos);
-        }
 
-        //if (player == null)
+            if (player.GetComponent<Rigidbody2D>().velocity.x < -1)
+            {
+                xPos = (float)-0.05;
+                transform.rotation = new Quaternion(0, -178, 0, 0);
+                zPos = 10;
+                transform.position = new Vector3(player.position.x - xPos, player.position.y + yPos, zPos);
+            }
+            if (player.GetComponent<Rigidbody2D>().velocity.x > 1)
+            {
+                xPos = (float)0.05;
+                transform.rotation = new Quaternion(0, 0, 0, 0);
+                zPos = -10;
+                transform.position = new Vector3(player.position.x + xPos, player.position.y + yPos, zPos);
+            }
+        }
+        else if (player == null)
+        {
+            GetComponent<Camera>().enabled = false;
+        }
+        //transform.position = new Vector3(player.position.x + xPos, player.position.y + yPos, zPos);
+
+        //if (player.GetComponent<Rigidbody2D>().velocity.x < -1)
         //{
-        //    Destroy(this);
+        //    xPos = (float)-0.05;
+        //    transform.rotation = new Quaternion(0, -178, 0, 0);
+        //    zPos = 10;
+        //    transform.position = new Vector3(player.position.x - xPos, player.position.y + yPos, zPos);
         //}
+        //if (player.GetComponent<Rigidbody2D>().velocity.x > 1)
+        //{
+        //    xPos = (float)0.05;
+        //    transform.rotation = new Quaternion(0, 0, 0, 0);
+        //    zPos = -10;
+        //    transform.position = new Vector3(player.position.x + xPos, player.position.y + yPos, zPos);
+        //}
+
+    }
+    public void SetPlayer(Transform playerTransform)
+    {
+        player = playerTransform;
     }
 }
