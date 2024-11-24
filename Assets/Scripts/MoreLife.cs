@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon;
+using Photon.Pun;
 
-public class MoreLife : MonoBehaviour
+public class MoreLife : MonoBehaviourPunCallbacks
 {
     [SerializeField] public int aumentoVida;
 

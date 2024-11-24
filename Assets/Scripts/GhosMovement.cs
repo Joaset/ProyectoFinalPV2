@@ -43,7 +43,6 @@ public class GhosMovement : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, pointA.position, speedObject * Time.deltaTime);
             if (disttanciaA < 0.3f && seMueve)
             {
-                //transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
                 if (debeEsperar)
                 {
                     StartCoroutine(Espera());
@@ -64,7 +63,6 @@ public class GhosMovement : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, pointB.position, speedObject * Time.deltaTime);
             if (disttanciaB < 0.3f && seMueve)
             {
-                //transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
                 if (debeEsperar)
                 {
                     StartCoroutine(Espera());

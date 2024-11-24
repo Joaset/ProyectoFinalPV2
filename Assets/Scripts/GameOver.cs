@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class GameOver : MonoBehaviour
     {
         SceneManager.LoadScene(0);
         GameManager.Instance.ResetVida();
+        PhotonNetwork.Disconnect();
         AudioManager.Instance.StopAudio(AudioManager.Instance.dead);
     }
 }

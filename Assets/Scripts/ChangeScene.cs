@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,8 @@ public class ChangeScene : MonoBehaviour
         {
             if (collision.gameObject.tag == "Player")
             {
-                SceneManager.LoadScene(2);
+                PhotonNetwork.LoadLevel("Win");
+                AudioManager.Instance.StopAudio(AudioManager.Instance.backgroundMusic);
             }
         }
         if (nombre == "puertaFinal")

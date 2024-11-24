@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DisabledHud : MonoBehaviour
+public class DisableHud : MonoBehaviour
 {
     [SerializeField] private Canvas canvas;
     private GameObject player;
-    
+
     void Update()
     {
         if (player == null)
@@ -19,7 +19,7 @@ public class DisabledHud : MonoBehaviour
         }
     }
 
-    public void SetPlayer( GameObject playerPrefab )
+    public void SetPlayer(GameObject playerPrefab)
     {
         player = playerPrefab;
     }

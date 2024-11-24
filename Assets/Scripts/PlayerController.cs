@@ -24,13 +24,16 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        velocidad = 5f;
-        fuerzaSalto = 12f;
-        tocarSueloRadio = 0.2f;
-        fuerzaGolpe = 500f;
-        puedeDisparar = true;
+        if (photonView.IsMine)
+        {
+            rigidBody = GetComponent<Rigidbody2D>();
+            animator = GetComponent<Animator>();
+            velocidad = 5f;
+            fuerzaSalto = 12f;
+            tocarSueloRadio = 0.2f;
+            fuerzaGolpe = 500f;
+            puedeDisparar = true;
+        }
     }
 
     

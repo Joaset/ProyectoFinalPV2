@@ -9,11 +9,6 @@ public class UICamara : MonoBehaviour
     [SerializeField] float yPos;
     [SerializeField] float zPos;
 
-    void Start()
-    {
-        //transform.position = new Vector3(player.position.x + xPos, player.position.y + yPos, zPos);
-    }
-
     void Update()
     {
         if (player != null)
@@ -40,24 +35,8 @@ public class UICamara : MonoBehaviour
         {
             GetComponent<Camera>().enabled = false;
         }
-        //transform.position = new Vector3(player.position.x + xPos, player.position.y + yPos, zPos);
-
-        //if (player.GetComponent<Rigidbody2D>().velocity.x < -1)
-        //{
-        //    xPos = (float)-0.05;
-        //    transform.rotation = new Quaternion(0, -178, 0, 0);
-        //    zPos = 10;
-        //    transform.position = new Vector3(player.position.x - xPos, player.position.y + yPos, zPos);
-        //}
-        //if (player.GetComponent<Rigidbody2D>().velocity.x > 1)
-        //{
-        //    xPos = (float)0.05;
-        //    transform.rotation = new Quaternion(0, 0, 0, 0);
-        //    zPos = -10;
-        //    transform.position = new Vector3(player.position.x + xPos, player.position.y + yPos, zPos);
-        //}
-
     }
+
     public void SetPlayer(Transform playerTransform)
     {
         player = playerTransform;
