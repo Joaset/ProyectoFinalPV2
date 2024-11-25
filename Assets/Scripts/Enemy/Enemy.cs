@@ -2,23 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemies : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
-    [SerializeField] private float healthPoints;
+    protected float healthPoints;
     [SerializeField] private GameObject explosionEnemigo;
     [SerializeField] public float dañoCausado;
-
-
-    void Start()
-    {
-        dañoCausado = 10f;
-    }
-
-   
-    void Update()
-    {
-        
-    }
+    [SerializeField] private AudioClip enemyDead;
 
     public void TomarDaño(float daño)
     {
@@ -36,4 +25,6 @@ public class Enemies : MonoBehaviour
         AudioManager.Instance.PlayAudio(AudioManager.Instance.enemydead);
         Destroy(gameObject);
     }
+
+    public abstract void Move();
 }

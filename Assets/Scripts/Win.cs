@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using Photon.Pun;
 
-public class Win : MonoBehaviour
+public class Win : MonoBehaviourPunCallbacks
 {
     [SerializeField] private TMP_Text textoGanador;
     void Start()

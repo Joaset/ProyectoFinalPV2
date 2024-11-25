@@ -12,9 +12,12 @@ public class MainMenu : MonoBehaviourPunCallbacks
     [SerializeField] private TMP_Text boton2;
     [SerializeField] private GameObject niveles;
     [SerializeField] private GameObject menu;
+    private bool puedeElegir;
+
     void Start()
     {
         AudioManager.Instance.PlayAudio(AudioManager.Instance.menuMusic);
+        puedeElegir = true;
     }
 
     public void OnClickConnect(int nivel)
@@ -24,16 +27,21 @@ public class MainMenu : MonoBehaviourPunCallbacks
             PhotonNetwork.NickName = nombreUsuario.text;
 
             PlayerPrefs.SetString("NombreJugador",nombreUsuario.text);
-            if (nivel == 1)
+
+            if (nivel == 1 && puedeElegir == true)
             {
                 boton.text = "Conectando...";
+                puedeElegir=false;
+                PhotonNetwork.ConnectUsingSettings();
+                PlayerPrefs.SetInt("NivelSeleccionado", nivel);
             }
-            if(nivel == 2)
+            if(nivel == 2 && puedeElegir == true)
             {
                 boton2.text = "Conectando...";
+                puedeElegir=false;
+                PhotonNetwork.ConnectUsingSettings();
+                PlayerPrefs.SetInt("NivelSeleccionado", nivel);
             }
-            PhotonNetwork.ConnectUsingSettings();
-            PlayerPrefs.SetInt("NivelSeleccionado", nivel);
         }
     }
 
@@ -43,7 +51,6 @@ public class MainMenu : MonoBehaviourPunCallbacks
         SceneManager.LoadScene(nivel);
         AudioManager.Instance.StopAudio(AudioManager.Instance.menuMusic);
         AudioManager.Instance.PlayAudio(AudioManager.Instance.backgroundMusic);
-        AudioManager.Instance.SetMusicControl(false);
     }
 
     public void CambiarNivel()
@@ -54,8 +61,8 @@ public class MainMenu : MonoBehaviourPunCallbacks
 
     public void Volver()
     {
-        niveles.SetActive(false);
-        menu.SetActive(true);
+            niveles.SetActive(false);
+            menu.SetActive(true);
     }
 
     public void Salir()

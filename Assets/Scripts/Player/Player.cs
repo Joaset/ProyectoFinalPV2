@@ -1,19 +1,14 @@
-using Cinemachine;
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class Player : MonoBehaviourPunCallbacks
 {
     private bool puedeRecibirDaño;
     private float cooldownDaño;
     private SpriteRenderer spriteRenderer;
-    [SerializeField] private Image barraVida;
-    [SerializeField] private GameObject contadorVida;
-    private DisableHud playerHud;
 
     void Start()
     {
@@ -22,22 +17,6 @@ public class Player : MonoBehaviourPunCallbacks
             puedeRecibirDaño = true;
             cooldownDaño = 3f;
             spriteRenderer = GetComponent<SpriteRenderer>();
-            GameManager.Instance.ResetVida();
-            ActualizarBarraVida();
-            playerHud = GameObject.Find("Canvas").GetComponent<DisableHud>();
-            playerHud.SetPlayer(gameObject);
-            barraVida = GameObject.Find("Canvas").transform.Find("Vida").GetComponent<Image>();
-            contadorVida = GameObject.Find("CantVida");
-        }
-    }
-
-    
-    void Update()
-    {
-        if (photonView.IsMine)
-        {
-            contadorVida.GetComponent<LifeCount>().ContarVida(GameManager.Instance.vidaMaxima);
-            ActualizarBarraVida();
         }
     }
 
@@ -56,8 +35,8 @@ public class Player : MonoBehaviourPunCallbacks
                 Color color = spriteRenderer.color;
                 color.a = 0.5f;
                 spriteRenderer.color = color;
-                GameManager.Instance.restarVida(collision.GetComponent<Enemies>().dañoCausado);
-                gameObject.GetComponent<PlayerController>().AplicarGolpe();
+                GameManager.Instance.restarVida(collision.GetComponent<Enemy>().dañoCausado);
+                gameObject.GetComponent<PlayerMovement>().AplicarGolpe();
 
                 if (GameManager.Instance.vidaMaxima <= 0)
                 {
@@ -81,7 +60,7 @@ public class Player : MonoBehaviourPunCallbacks
                 color.a = 0.5f;
                 spriteRenderer.color = color;
                 GameManager.Instance.restarVida(collision.GetComponent<LavaDamage>().dañoCausado);
-                gameObject.GetComponent<PlayerController>().AplicarGolpe();
+                gameObject.GetComponent<PlayerMovement>().AplicarGolpe();
 
                 if (GameManager.Instance.vidaMaxima <= 0)
                 {
@@ -110,13 +89,5 @@ public class Player : MonoBehaviourPunCallbacks
         Color c = spriteRenderer.color;
         c.a = 1f;
         spriteRenderer.color = c;
-    }
-
-    private void ActualizarBarraVida()
-    {
-        if (barraVida != null)
-        {
-            barraVida.fillAmount = GameManager.Instance.vidaMaxima / 100f;
-        }
     }
 }

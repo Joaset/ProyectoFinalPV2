@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using Photon.Pun;
 
-public class PlayerName : MonoBehaviour
+public class PlayerName : MonoBehaviourPunCallbacks
 {
     [SerializeField] private TMP_Text nombreJugador;
 

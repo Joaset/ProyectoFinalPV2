@@ -6,24 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-   [SerializeField] string nombre;
    private void OnTriggerEnter2D(Collider2D collision) 
    {
-        if (nombre == "puerta")
+        if (collision.gameObject.tag == "Player")
         {
-            if (collision.gameObject.tag == "Player")
-            {
-                PhotonNetwork.LoadLevel("Win");
-                AudioManager.Instance.StopAudio(AudioManager.Instance.backgroundMusic);
-            }
-        }
-        if (nombre == "puertaFinal")
-        {
-            if (collision.gameObject.tag == "Player")
-            {
-                SceneManager.LoadScene(3);
-                AudioManager.Instance.StopAudio(AudioManager.Instance.backgroundMusic);
-            }
+            SceneManager.LoadScene(3);
+            //PhotonNetwork.LoadLevel("Win");
+            AudioManager.Instance.StopAudio(AudioManager.Instance.backgroundMusic);
         }
     }
 }
