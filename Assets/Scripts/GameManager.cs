@@ -1,12 +1,12 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPunCallbacks
 {
     public static GameManager Instance { get; private set; }
-    public float vidaMaxima
-        ;
+    public float vidaMaxima;
 
     private void Awake()
     {

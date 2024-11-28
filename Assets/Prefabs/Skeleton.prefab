@@ -44,8 +44,8 @@ GameObject:
   - component: {fileID: 9204224099522472190}
   - component: {fileID: 5387577823117035586}
   - component: {fileID: 7672483997308666274}
-  - component: {fileID: -3126912318917837921}
   - component: {fileID: 2578572624834269571}
+  - component: {fileID: 8208613553451487020}
   m_Layer: 10
   m_Name: Skeleton
   m_TagString: enemy
@@ -216,21 +216,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-3126912318917837921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2947953763020428357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d817c86d9ce4ab4492aa80b9134c7d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthPoints: 2
-  explosionEnemigo: {fileID: 9130877022469415413, guid: b0ddf009f74f40446af237a7c2b3357b, type: 3}
-  "da\xF1oCausado": 1
 --- !u!114 &2578572624834269571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,11 +223,38 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2947953763020428357}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c3c871da12912f4eb4913a3d2882423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  velocidad: 0
+  sueloEnemigo: {fileID: 8763300922533097083}
+  detectarPared: {fileID: 1821718765424678311}
+  detectarSuelo: {fileID: 4975370479233745980}
+  enemigoQuieto: 0
+  enemigoCaminando: 1
+  paredDetectada: 0
+  sueloDetectado: 0
+  estaSuelo: 0
+  radioDeteccion: 0.1
+  tipoSuelo:
+    serializedVersion: 2
+    m_Bits: 256
+--- !u!114 &8208613553451487020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2947953763020428357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f44640c27f7bed42b871f2582cc1a6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionEnemigo: {fileID: 9130877022469415413, guid: b0ddf009f74f40446af237a7c2b3357b, type: 3}
+  "da\xF1oCausado": 0
   velocidad: 0
   sueloEnemigo: {fileID: 8763300922533097083}
   detectarPared: {fileID: 1821718765424678311}
