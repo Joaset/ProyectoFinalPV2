@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class PlayerMovement : MonoBehaviourPunCallbacks
+public class PlayerMovement : MonoBehaviourPunCallbacks, IMovable
 {
     private float velocidad;
     private float fuerzaSalto;
     private Rigidbody2D rigidBody;
     [SerializeField] private LayerMask capaSuelo;
-    private Animator animator;
-    //private float velX;
-    //private float velY;
     [SerializeField] private Transform suelo;
+    private PlayerInput playerInput;
     private bool tocarSuelo;
     private float tocarSueloRadio;
     private float fuerzaGolpe;
@@ -22,7 +20,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             rigidBody = GetComponent<Rigidbody2D>();
-            animator = GetComponent<Animator>();
+            playerInput = GetComponent<PlayerInput>();
             velocidad = 5f;
             fuerzaSalto = 12f;
             tocarSueloRadio = 0.2f;
@@ -35,62 +33,26 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             tocarSuelo = Physics2D.OverlapCircle(suelo.position, tocarSueloRadio, capaSuelo);
-            CambiarDireccion();
-
-            if (tocarSuelo)
-            {
-                animator.SetBool("isJumping", false);
-            }
-            else
-            {
-                animator.SetBool("isJumping", true);
-            }
         }
     }
 
-    private void FixedUpdate()
+    public void Saltar()
     {
-        if (photonView.IsMine)
-        {
-            Mover();
-            Saltar();
-        }
-    }
-
-    void Saltar()
-    {
-        if (Input.GetButton("Jump") && tocarSuelo)
+        if (playerInput.ApretarBottonSalto() && tocarSuelo)
         {
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, fuerzaSalto);
             AudioManager.Instance.PlayAudio(AudioManager.Instance.jump);
         }
     }
 
-    void Mover()
+    public void Mover()
     {
-        float velX = Input.GetAxis("Horizontal");
+        float velX = playerInput.ApretarBotonMover();
         float velY = rigidBody.velocity.y;
         rigidBody.velocity = new Vector2(velX * velocidad, velY);
-
-        if (rigidBody.velocity.x != 0)
-        {
-            animator.SetBool("isRunning", true);
-            if (Input.GetButton("Fire1"))
-            {
-                animator.SetBool("isRunningShoot", true);
-            }
-            else
-            {
-                animator.SetBool("isRunningShoot", false);
-            }
-        }
-        else
-        {
-            animator.SetBool("isRunning", false);
-        }
     }
 
-    void CambiarDireccion()
+    public void Girar()
     {
         if (rigidBody.velocity.x > 1)
         {
@@ -116,5 +78,15 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         }
 
         rigidBody.AddForce(direccionGolpe * fuerzaGolpe);
+    }
+
+    public bool GetTocarSuelo()
+    {
+        return tocarSuelo;
+    }
+
+    public float MoverPersonaje()
+    {
+        return rigidBody.velocity.x;
     }
 }

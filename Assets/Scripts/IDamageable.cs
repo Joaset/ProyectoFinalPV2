@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IPlayer
+public interface IDamageable
 {
-    event Action<int> OnHealthUpdated;
+    void RecibirDaño(float daño);
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slime : Enemy
+public class Slime : Enemy, IDamageable, IMovable
 {
     [SerializeField] private float velocidad;
     [SerializeField] private Transform sueloEnemigo;
@@ -50,7 +50,7 @@ public class Slime : Enemy
         if (enemigoCaminando)
         {
 
-            Move();
+            Mover();
         }
     }
 
@@ -60,7 +60,7 @@ public class Slime : Enemy
         transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
     }
 
-    public override void Move()
+    public void Mover()
     {
         rigidEnemigo.constraints = RigidbodyConstraints2D.FreezeRotation;
         anim.SetBool("idle", false);
@@ -72,6 +72,16 @@ public class Slime : Enemy
         else
         {
             rigidEnemigo.velocity = new Vector2(-velocidad * Time.deltaTime, rigidEnemigo.velocity.y);
+        }
+    }
+
+    public void RecibirDaño(float daño)
+    {
+        healthPoints -= daño;
+
+        if (healthPoints <= 0)
+        {
+            Morir();
         }
     }
 }

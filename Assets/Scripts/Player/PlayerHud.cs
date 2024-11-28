@@ -10,21 +10,15 @@ public class PlayerHud : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject contadorVida;
     private DisableHud playerHud;
 
-    void Start()
-    {
-        Hud();
-    }
-
     void Update()
     {
         if (photonView.IsMine)
         {
             contadorVida.GetComponent<LifeCount>().ContarVida(GameManager.Instance.vidaMaxima);
-            ActualizarBarraVida();
         }
     }
 
-    private void ActualizarBarraVida()
+    public void ActualizarBarraVida()
     {
         if (barraVida != null)
         {

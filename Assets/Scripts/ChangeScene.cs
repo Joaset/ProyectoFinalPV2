@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ChangeScene : MonoBehaviour
+public class ChangeScene : MonoBehaviourPunCallbacks
 {
    private void OnTriggerEnter2D(Collider2D collision) 
    {
         if (collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene(3);
-            //PhotonNetwork.LoadLevel("Win");
-            AudioManager.Instance.StopAudio(AudioManager.Instance.backgroundMusic);
+            FinishGame finalizarJuego = FindObjectOfType<FinishGame>();
+            if (finalizarJuego != null)
+            {
+                finalizarJuego.OnPlayerReachGoal();
+            }
         }
     }
 }

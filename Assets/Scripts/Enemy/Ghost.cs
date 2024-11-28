@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ghost : Enemy
+public class Ghost : Enemy, IDamageable, IMovable
 {
     [SerializeField] private Transform pointA, pointB;
     [SerializeField] private float speed;
@@ -31,11 +31,11 @@ public class Ghost : Enemy
     {
         if (debeMover)
         {
-            Move();
+            Mover();
         }
     }
 
-    public override void Move()
+    public void Mover()
     {
         float disttanciaA = Vector2.Distance(transform.position, pointA.position);
         float disttanciaB = Vector2.Distance(transform.position, pointB.position);
@@ -78,6 +78,16 @@ public class Ghost : Enemy
                     mueveB = false;
                 }
             }
+        }
+    }
+
+    public void RecibirDaño(float daño)
+    {
+        healthPoints -= daño;
+
+        if (healthPoints <= 0)
+        {
+            Morir();
         }
     }
 

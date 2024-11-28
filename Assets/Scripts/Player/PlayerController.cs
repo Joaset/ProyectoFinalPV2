@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             tocarSuelo = Physics2D.OverlapCircle(suelo.position, tocarSueloRadio, capaSuelo);
-            CambiarDireccion();
+            Girar();
 
             if (tocarSuelo)
             {
@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         }
     }
 
-    void CambiarDireccion()
+    void Girar()
     {
         if(rigidBody.velocity.x > 1)
         {

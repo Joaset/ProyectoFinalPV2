@@ -10,7 +10,7 @@ public class Win : MonoBehaviourPunCallbacks
     [SerializeField] private TMP_Text textoGanador;
     void Start()
     {
-        textoGanador.text = "El ganador es " + PlayerPrefs.GetString("NombreJugador");
+        //textoGanador.text = "El ganador es " + PlayerPrefs.GetString("NombreJugador");
         AudioManager.Instance.PlayAudio(AudioManager.Instance.winMusic);
     }
     public void IniciarMenuPrincipal()

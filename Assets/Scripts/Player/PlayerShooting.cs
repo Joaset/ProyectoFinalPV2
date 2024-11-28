@@ -8,57 +8,62 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject bullet;
     private bool puedeDisparar;
-    private Rigidbody2D rigidBody;
-    private Animator animator;
+    private PlayerMovement playerMovement;
+    private PlayerAnimation playerAnimation;
+    private PlayerInput playerInput;
     [SerializeField] private float tiempoEntreAtaques;
-    [SerializeField] private float tiempoSiguienteAtaque;
+     private float tiempoSiguienteAtaque;
+
     void Start()
     {
         if (photonView.IsMine)
         {
-            rigidBody = GetComponent<Rigidbody2D>();
-            animator = GetComponent<Animator>();
+            playerMovement = GetComponent<PlayerMovement>();
+            playerAnimation = GetComponent<PlayerAnimation>();
+            playerInput = GetComponent<PlayerInput>();
             puedeDisparar = true;
+            tiempoSiguienteAtaque = 0f;
         }
     }
 
-    void Update()
+    public void CambiarDireccion()
     {
-        if (photonView.IsMine)
-        {
-            CambiarDireccion();
-            Atacar();
-        }
-    }
-
-    void CambiarDireccion()
-    {
-        if (rigidBody.velocity.x > 1)
+        if (playerMovement.MoverPersonaje() > 1)
         {
             firePoint.transform.eulerAngles = new Vector3(0, 0, 0);
         }
-        else if (rigidBody.velocity.x < -1)
+        else if (playerMovement.MoverPersonaje() < -1)
         {
             firePoint.transform.eulerAngles = new Vector3(0, 180, 0);
         }
     }
 
-    void Atacar()
+    public void Atacar()
     {
         if (tiempoSiguienteAtaque > 0)
         {
             tiempoSiguienteAtaque -= Time.deltaTime;
         }
-        if (Input.GetButtonDown("Fire1") && tiempoSiguienteAtaque <= 0 && puedeDisparar == true)
+        if (playerInput.ApretarBotonDisparo() && tiempoSiguienteAtaque <= 0 && puedeDisparar == true)
         {
-            animator.SetBool("isShooting", true);
+            //animator.SetBool("isShooting", true);
             Instantiate(bullet, firePoint.position, firePoint.rotation);
             AudioManager.Instance.PlayAudio(AudioManager.Instance.shoot);
             tiempoSiguienteAtaque = tiempoEntreAtaques;
         }
         else
         {
-            animator.SetBool("isShooting", false);
+            //animator.SetBool("isShooting", false);
         }
+    }
+
+    public float GetTiempoSiguienteAtaque()
+    {
+        return tiempoSiguienteAtaque;
+    }
+
+    public bool GetPuedeDisparar()
+    {
+        return puedeDisparar;
     }
 }
