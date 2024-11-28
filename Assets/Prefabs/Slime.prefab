@@ -74,7 +74,6 @@ GameObject:
   - component: {fileID: 8857452037068891335}
   - component: {fileID: 5486075757816437582}
   - component: {fileID: 8513117083058967550}
-  - component: {fileID: 1351483985342434243}
   - component: {fileID: 1705762060034818028}
   - component: {fileID: 8836472267199215720}
   m_Layer: 10
@@ -226,31 +225,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.21792349, y: 0.30498886}
   m_EdgeRadius: 0
---- !u!114 &1351483985342434243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2937227056850945694}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c3c871da12912f4eb4913a3d2882423, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidad: 0
-  sueloEnemigo: {fileID: 4343044937963674087}
-  detectarPared: {fileID: 5642290385110856761}
-  detectarSuelo: {fileID: 3662388478144889653}
-  enemigoQuieto: 0
-  enemigoCaminando: 1
-  paredDetectada: 0
-  sueloDetectado: 0
-  estaSuelo: 0
-  radioDeteccion: 0.1
-  tipoSuelo:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!95 &1705762060034818028
 Animator:
   serializedVersion: 5

@@ -13,22 +13,10 @@ public class FinishGame : MonoBehaviourPunCallbacks
     {
         if (gameFinished) return;
         gameFinished = true;
-        //photonView.RPC("DecideWinner", RpcTarget.All);
         photonView.RPC("NotifyWinner", RpcTarget.All, PhotonNetwork.LocalPlayer.ActorNumber);
     }
 
     [PunRPC]
-    //public void DecideWinner()
-    //{
-    //    if (PhotonNetwork.LocalPlayer.IsMasterClient)
-    //    {
-    //        SceneManager.LoadScene(3);
-    //    }
-    //    else
-    //    {
-    //        SceneManager.LoadScene(4);
-    //    }
-    //}
 
     public void NotifyWinner(int winnerActorNumber)
     {

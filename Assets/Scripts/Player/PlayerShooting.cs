@@ -46,14 +46,9 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
         }
         if (playerInput.ApretarBotonDisparo() && tiempoSiguienteAtaque <= 0 && puedeDisparar == true)
         {
-            //animator.SetBool("isShooting", true);
             Instantiate(bullet, firePoint.position, firePoint.rotation);
             AudioManager.Instance.PlayAudio(AudioManager.Instance.shoot);
             tiempoSiguienteAtaque = tiempoEntreAtaques;
-        }
-        else
-        {
-            //animator.SetBool("isShooting", false);
         }
     }
 
