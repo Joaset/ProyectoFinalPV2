@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7395797569257376821}
   - component: {fileID: 3172974700137340493}
   - component: {fileID: 5845668605627974343}
-  - component: {fileID: 3116445589717239351}
   - component: {fileID: 532402757773897360}
   m_Layer: 10
   m_Name: Ghost
@@ -182,21 +181,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3116445589717239351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 883095066439049191}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c76eebf4923ecd4e83d6a9762c35ee9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pointA: {fileID: 0}
-  pointB: {fileID: 0}
-  speedObject: 0
 --- !u!114 &532402757773897360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,7 +197,7 @@ MonoBehaviour:
   "da\xF1oCausado": 0
   pointA: {fileID: 0}
   pointB: {fileID: 0}
-  speedObject: 0
+  speed: 0
 --- !u!1 &4450664836342795625
 GameObject:
   m_ObjectHideFlags: 0
